@@ -1,0 +1,50 @@
+{
+
+    "sceneID": 0,
+
+    "currency":  "USD",
+
+    "asset1": { 
+        "name": "Apple Inc.",
+        "abbreviation": "AAPL",
+        "startPrice": 175.3 ,
+        "endPrice":  167.4
+    },
+    "asset2": {
+        "name": "Microsoft Corporation",
+        "abbreviation": "MSFT",
+        "startPrice": 1237.5,
+        "endPrice": 1729.6
+    },
+    "asset3": {
+        "name": "Amazon.com, Inc.",
+        "abbreviation": "AMZN",
+        "startPrice": 279.6,
+        "endPrice": 593.5 
+    },
+    "asset4": {
+        "name": "Tesla, Inc.",
+        "abbreviation": "TSLA",
+        "startPrice": 289.5,
+        "endPrice":  394.6
+    },
+    "asset5": {
+        "name": "Alphabet Inc. (Google)",
+        "abbreviation": "GOOG",
+        "startPrice": 495.5,
+        "endPrice" : 489.5
+    }, 
+
+    "marketinterest": 3,
+
+    "location": "New York",
+    
+    "timeHorizon": "month",
+
+    "startDate": "2017-11-01",
+
+    "benchmark": "S&P 500",
+
+    "benchmarkPerformance": 2.437
+
+}
