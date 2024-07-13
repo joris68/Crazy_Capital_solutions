@@ -10,6 +10,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@polygon.io/client-js": "^7.3.2"
   }
 }

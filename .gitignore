@@ -30,3 +30,7 @@ terraform.rc
 # the key files
 go-de-internal*
 .development.env
+.env
+
+#python
+venv
