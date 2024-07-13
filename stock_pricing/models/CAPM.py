@@ -26,6 +26,13 @@ class CAPM:
         result = capm_model.summary()
         print(capm_model.params)
         print(capm_model.tvalues)
+    
+    @classmethod
+    def create_return_object(model):
+        result = {}
+        result['']
+
+
         
         
 
