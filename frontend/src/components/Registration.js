@@ -58,7 +58,7 @@ export function Registration() {
             
         }).catch(err => {
             setErrorHappenend(true);
-            console.log(error);
+            console.log(err);
         })
       } else{
 
