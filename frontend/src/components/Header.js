@@ -12,7 +12,7 @@ export function HeaderBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Link to={"/explanation"}><Nav.Link >How does it work?</Nav.Link></Link>
+          <Link to={"/explanation"}><Nav.Link >Solutions</Nav.Link></Link>
             <Link to={"/account/:userid"}><Nav.Link >Dashboard</Nav.Link></Link>
             <Nav className="ms-auto"> 
              <Link to={"/login"}><Nav.Link>Login</Nav.Link></Link>

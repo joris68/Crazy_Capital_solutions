@@ -7,16 +7,17 @@ import Card from 'react-bootstrap/Card';
 
 
 
+
 export function Location({city}){
     let text;
     let header;
     if (city === "New York") {
-        text = "Find you way on Wall Street!";
-        header = "New York";
+        text = "Price and Asset with CAPM";
+        header = "Single Asset";
     }
     if (city === "Tokyo") {
-        text = "Dominate in the Tokyan Stock Exchange!";
-        header = "Tokyo";
+        text = "Evaluate an Portfolio";
+        header = "Entire Portfolio";
     }
     
 
@@ -28,7 +29,7 @@ export function Location({city}){
           <Card.Text>
             {text}
           </Card.Text>
-          <Button variant="primary">Play Now!</Button>
+          <Button variant="primary">Price Now!</Button>
         </Card.Body>
       </Card>
     );

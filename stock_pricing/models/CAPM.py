@@ -23,14 +23,25 @@ class CAPM:
         y = X.pop('asset')
         X = sm.add_constant(X);
         capm_model = sm.OLS(y, X).fit()
-        result = capm_model.summary()
-        print(capm_model.params)
-        print(capm_model.tvalues)
+        #result = capm_model.summary()
+        input_parameters = {
+            'asset_name' : asset_name,
+            'benchmark': benchmark,
+            'start_date': start_date,
+            'end_date': end_date
+        }
+        return CAPM.create_return_object(capm_model, beta, input_parameters)
     
     @classmethod
-    def create_return_object(model):
-        result = {}
-        result['']
+    def create_return_object(cls, model, beta, input_parameters: dict):
+        results_dict = {}
+        for k, v in input_parameters.items():
+            results_dict[k] = v
+        results_dict["coefficients"] = model.params.to_dict()
+        results_dict["t-values"] = model.tvalues.to_dict()
+        results_dict['beta'] = beta
+        return results_dict
+        
 
 
         
@@ -41,5 +52,6 @@ class CAPM:
 
 
 if __name__ == "__main__":
-    CAPM.price_asset("AAPL", "^GSPC", "2014-01-01", "2015-01-01")
+     result= CAPM.price_asset("AAPL", "^GSPC", "2014-01-01", "2015-01-01")
+     print(result)
     
