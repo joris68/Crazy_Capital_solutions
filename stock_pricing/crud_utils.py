@@ -22,7 +22,9 @@ def save_CAPM_model_to_mongo(asset_dic: dict) -> bool:
         camp_assets = database.get_collection("pricedAssets")
 
         # first check amount of records in the database
-        doc_count = camp_assets.count_documents({"userID": asset_dic['userid']})
+        #doc_count = camp_assets.count_documents({"userID": asset_dic['userid']})
+        # count everything in the collection
+        doc_count = camp_assets.count_documents({})
         if(doc_count < 5):
             camp_assets.insertOne(asset_dic)
             print("Document was successfully inserted into the collection")
@@ -67,6 +69,8 @@ def get_prev_prices_capms(query_dic: dict) -> list[dict] | None:
         return list_result
     except Exception as e:
         return None
+    finally:
+        client.close()
 
 
 

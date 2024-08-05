@@ -39,7 +39,7 @@ class CAPM:
             results_dict[k] = v
         results_dict["coefficients"] = model.params.to_dict()
         results_dict["t-values"] = model.tvalues.to_dict()
-        results_dict['beta'] = beta
+        #results_dict['beta'] = beta
         return results_dict
         
 

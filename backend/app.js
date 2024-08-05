@@ -1,8 +1,9 @@
 const express = require('express');
 const {loginUser} = require('./routes/login');
 const {registerUser} = require('./routes/register');
+const {search} = require('./routes/searchassets');
 const app = express();
-const port = 9000;
+const port = 6000;
 app.use(express.json());
 
 
@@ -15,6 +16,10 @@ app.get("/", (req, res) => {
 app.post("/checkusername", (req, res) => {
     
 })
+
+app.get("/api/getassets", (req, res) => {
+    search(req, res);
+});
 
 app.post("/registeruser", (req, res) => {
     registerUser(req, res);
