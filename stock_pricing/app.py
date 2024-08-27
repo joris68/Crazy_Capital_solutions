@@ -1,10 +1,17 @@
 from flask import Flask, request
-from models import CAPM
-from stock_pricing.crud_utils import save_CAPM_model_to_mongo, get_prev_prices_capms
+from models.CAPM import CAPM
+from crud_utils import save_CAPM_model_to_mongo, get_prev_prices_capms
+from dotenv import load_dotenv
+import os
+import json
+
+load_dotenv()
 
 app = Flask(__name__)
 
-@app.route("/api/price/capm", methods=['POST'])
+
+
+@app.route("/pricing/capm", methods=['POST'])
 def evaluate_CAPM_model():
     try:
         RISKY_ASSET = request.args['assetname']
@@ -18,15 +25,19 @@ def evaluate_CAPM_model():
         result = CAPM.price_asset(RISKY_ASSET, BENCHMARK, START_TIME, END_TIME)
         successful = save_CAPM_model_to_mongo(result)
         if(successful): 
-            return result , 200
+            return json.dumps(result) , 200
         else:
             return "Database error occured", 402
     
     except Exception as e:
-        return "An error Occurred", 400
+        return f"An error occurred: {e}", 401
     
+@app.route("/", methods=['GET'])
+def hello_world():
+    return "Hellp from pricing service", 200
 
-@app.route("/api/price/capm/prev", methods=['GET'])
+
+""" @app.route("/api/price/capm/prev", methods=['GET'])
 def get_previously_priced_assets():
     try:
         #maybe here userID as cookie?
@@ -39,7 +50,7 @@ def get_previously_priced_assets():
             return result, 200
 
     except Exception as e:
-        return "Function error occured in the route handler", 400
+        return "Function error occured in the route handler", 400 """
 
 
 

@@ -1,10 +1,12 @@
 
 
 
-export function SearchbarResult({searchobject}) {
+export function SearchbarResult({searchResultlist}) {
     return(
-        <div className="search-result">
-            <p>{ searchobject['Security']}</p>
+        <div className="search-results">
+            <ul>
+                {searchResultlist.map(obj => <li>{obj['Security']}</li>)}
+            </ul>
         </div>
 
     );

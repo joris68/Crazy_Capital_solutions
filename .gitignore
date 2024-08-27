@@ -34,3 +34,7 @@ go-de-internal*
 
 #python
 venv
+
+# dev
+playground
+__pycache__

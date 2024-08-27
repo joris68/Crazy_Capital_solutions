@@ -1,19 +1,15 @@
 
+const { MongoClient } = require('mongodb');
 
-const admin = require('firebase-admin');
-
-export function initConnection (){
-    // Initialize the Firebase Admin SDK
-    admin.initializeApp();
-    
-    // Configure the Firestore client to connect to the emulator
-    admin.firestore().settings({
-      host: 'localhost:8080', // Replace with your emulator's host and port
-      ssl: false
-    });
-    
-    const db = admin.firestore();
-
+function connectToMongo(){
+  try {
+    const client = new MongoClient(uri);
+    client.connect();
+    const db = client.db('crazy_capital');
+    return [db, client];
+  } catch (error) {
+    console.error('Connection to MongoDB Atlas failed!', error);
+  }
 }
 
-
+module.exports = connectToMongo;

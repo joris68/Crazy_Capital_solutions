@@ -1,0 +1,15 @@
+services:
+      api:
+        image: express-api
+        ports:
+        - "3000:3000"
+      
+      mongo:
+        image: mongodb/mongodb-community-server
+        ports:
+        - "27017:27017"
+
+      pricing-service:
+        image: pricing
+        ports:
+        - "8000:5000"

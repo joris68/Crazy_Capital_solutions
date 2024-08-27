@@ -14,24 +14,22 @@ def save_CAPM_model_to_mongo(asset_dic: dict) -> bool:
     '''
 
     try:
-        asset_dic['createdAt'] = datetime.now(tz=datetime.timezone.utc)
+        asset_dic['createdAt'] = datetime.now()
 
-        client = MongoClient(os.environ['MONGO_URI'])
+        client = MongoClient(os.environ['MONGO'])
         print("conncected to Mongo URi")
-        database = client.get_database("crazy_capital")
-        camp_assets = database.get_collection("pricedAssets")
+        database = client["crazy_capital"]
+        camp_assets = database["priced_assets"]
+        print("got the collection")
 
-        # first check amount of records in the database
-        #doc_count = camp_assets.count_documents({"userID": asset_dic['userid']})
-        # count everything in the collection
         doc_count = camp_assets.count_documents({})
-        if(doc_count < 5):
-            camp_assets.insertOne(asset_dic)
+        print("docs got counted")
+        if(doc_count < 6):
+            camp_assets.insert_one(asset_dic)
             print("Document was successfully inserted into the collection")
+            return True
         else :
-            # delete last record
-            #sort descending order
-            earliest_asset = camp_assets.find_many({"userID": asset_dic["userid"]}).sort("timestamp", -1).limit(1).next()
+            earliest_asset = camp_assets.find_many({}).sort("createdAt", -1).limit(1).next()
             doc_id = earliest_asset['_id']
             result = camp_assets.delete_one({"_id": doc_id})
             if(result['deleted_count'] == 1):
@@ -45,12 +43,12 @@ def save_CAPM_model_to_mongo(asset_dic: dict) -> bool:
 
 
     except Exception as e:
-        print("error when savinf to mongoDB")
+        print(f"error when savinf to mongoDB {e}")
         return False
     finally:
          client.close()
 
-def get_prev_prices_capms(query_dic: dict) -> list[dict] | None:
+def get_prev_prices_capms(query_dic: dict) -> list[dict]:
     '''
     Getting all previously priced assets from a certain user
     '''

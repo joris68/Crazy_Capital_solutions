@@ -12,7 +12,7 @@ class CAPM:
             raise Exception("Downloading the data from Yahoo finance went wrong")
 
         # change time frequency from day to month, take the last value of each month and calculate the relative change for the specific months
-        X = df['Adj Close'].rename(columns={asset_name: 'asset', benchmark: 'market'}).resample('M').last().pct_change().dropna();
+        X = df['Adj Close'].rename(columns={asset_name: 'asset', benchmark: 'market'}).resample('M').last().pct_change().dropna()
 
         #calculate the covariance between the asset and the market
         covariance = X.cov().iloc[0,1]
@@ -21,7 +21,7 @@ class CAPM:
         beta = covariance / benchmark_variance
 
         y = X.pop('asset')
-        X = sm.add_constant(X);
+        X = sm.add_constant(X)
         capm_model = sm.OLS(y, X).fit()
         #result = capm_model.summary()
         input_parameters = {
