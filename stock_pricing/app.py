@@ -4,10 +4,12 @@ from crud_utils import save_CAPM_model_to_mongo, get_prev_prices_capms
 from dotenv import load_dotenv
 import os
 import json
+from bson.json_util import dumps
 
 load_dotenv()
 
 app = Flask(__name__)
+
 
 
 
@@ -23,9 +25,12 @@ def evaluate_CAPM_model():
     
     try:
         result = CAPM.price_asset(RISKY_ASSET, BENCHMARK, START_TIME, END_TIME)
+        print("pricing hat funktioniert")
         successful = save_CAPM_model_to_mongo(result)
+        
+        print(dumps(result))
         if(successful): 
-            return json.dumps(result) , 200
+            return dumps(result) , 200
         else:
             return "Database error occured", 402
     
@@ -37,20 +42,17 @@ def hello_world():
     return "Hellp from pricing service", 200
 
 
-""" @app.route("/api/price/capm/prev", methods=['GET'])
+@app.route("/pricing/capm/prev", methods=['GET'])
 def get_previously_priced_assets():
     try:
-        #maybe here userID as cookie?
-        userID = request.args['userID']
-        query_dic = {'userID': userID}
-        result = get_prev_prices_capms(query_dic)
+        result = get_prev_prices_capms()
         if(result is None):
             return "Database error occured Please try again later", 400
         else:
-            return result, 200
+            return dumps(result), 200
 
     except Exception as e:
-        return "Function error occured in the route handler", 400 """
+        return "Function error occured in the route handler", 400
 
 
 

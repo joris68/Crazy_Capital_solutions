@@ -5,7 +5,7 @@
 import {fuseIndex} from './searchUtils.js';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import {useState, useMemo} from 'react';
-import { SearchbarResult } from './SearchbarResult';
+//import { SearchbarResult } from './SearchbarResult';
 
 
 
@@ -22,9 +22,6 @@ export function Searchbar() {
         setSearchResults(results);
         
     }
-    
-
-
     return (
         <>
             <Form inline>
@@ -41,12 +38,8 @@ export function Searchbar() {
             <div>
                 {searchResults.length === 0 && searchTerm.length > 0 ? <p>Not is S&P 500</p> : SearchbarResult({searchResults})}
             </div>
-
-
-
         </>
 
-        
     );
 }
 

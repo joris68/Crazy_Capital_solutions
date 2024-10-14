@@ -9,19 +9,16 @@ const axios = require("axios");
  */
 router.post('/', (req, res) => {
     // first check if everything is there
-    const ASSET = req.body.asset;
-    const BENCHMARK = req.body.benchmark;
-    const STARTTIME = req.body.starttime;
-    const ENDTIME = req.body.endtime;
+    const [ASSET, BENCHMARK, STARTTIME, ENDTIME ] = Object.values(req.body);
     if(ASSET && BENCHMARK && STARTTIME && ENDTIME){
         // call API
         
-        axios.post(`http://localhost:8000/pricing/capm?assetname=${ASSET}&benchmark=${BENCHMARK}&starttime=${STARTTIME}&endtime=${ENDTIME}`, {}).then((response) => {
+        axios.post(`http://0.0.0.0:8000/pricing/capm?assetname=${ASSET}&benchmark=${BENCHMARK}&starttime=${STARTTIME}&endtime=${ENDTIME}`, {}).then((response) => {
             res.status(200);
             res.send(response.data);
-        }, (error) => {
-            res.status(400);
-            res.send(error);
+        }).catch((error) => {
+            console.error("Error calling pricing API:", error);
+            res.status(500).send("Error fetching pricing data");
         })
 
     } else{

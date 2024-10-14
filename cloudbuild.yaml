@@ -4,16 +4,3 @@ steps:
     cd finance_game
     docker build -t europe-west1-docker.pkg.dev/$PROJECT_ID/webserviceimages/react:latest .
   automapSubstitutions: true
-
-# Deploy container image to Cloud Run
-#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-#  entrypoint: gcloud
-#  args:
-#  - 'run'
-#  - 'deploy'
-#  - 'react'  # No single quotes needed for service names
-##  - '--image'
-#  - 'gcr.io/$PROJECT_ID/SERVICE_NAME:$COMMIT_SHA'
-#  - '--region'
- # - 'SERVICE_REGION'
-#
